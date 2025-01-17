@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    <title>Student List</title>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2><center>Student List</center></h2>
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Roll No</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Age</th>
+                <th>Enrollment Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stu in object_list %}
+            <tr>
+                <td>{{ stu.roll_no }}</td>
+                <td>{{ stu.first_name }}</td>
+                <td>{{ stu.last_name }}</td>
+                <td>{{ stu.email }}</td>
+                <td>{{ stu.age }}</td>
+                <td>{{ stu.enrollment_date }}</td>
+                <td>
+                    <a href="{% url 'stu_update' stu.roll_no %}" class="btn btn-success btn-sm me-2">Update</a>
+                    <a href="{% url 'stu_delete' stu.roll_no %}" class="btn btn-warning btn-sm">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7" class="text-center">No students found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
